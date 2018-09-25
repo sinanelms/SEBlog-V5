@@ -1,0 +1,275 @@
+{% extends "layoutsite.html" %}
+
+{% block body %}
+
+<h3>Kontrol Paneli</h3>
+<small>Hoşgeldin,<strong>{{session["username"]}}</strong> </small>
+<hr>
+
+  <input class="form-control" id="myInput" type="text" placeholder="Ara..">
+  <br>
+
+{% if articles %}
+<table class="sortable">
+    <thead>
+        
+      <tr>
+      <th scope="col">id</th>
+      <th scope="col">İsim</th>        
+      <th scope="col">Yer</th>
+      <th scope="col">Bölge</th>
+      <th scope="col">Teşkilatı</th>
+      <th scope="col">Acm</th>
+      <th scope="col">İli</th>
+      <th scope="col">Zaman</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      {% for article in articles %}
+      
+      <tr>
+      <td scope="row">{{article.no}}</td>
+      <td>{{article.isim}}</td>        
+      <td>{{article.yerler}}</td>
+      <td>{{article.bolge}}</td>
+      <td>{{article.teskilati}}</td>
+      <td>{{article.acm}}</td>
+      <td>{{article.ili}}</td>
+      <td>{{article.zaman}}</td>
+    </tr>
+      {% endfor %} 
+    </tbody>
+  </table>
+<style>
+    table {
+      table-layout: fixed;
+      width: 100%;    
+  }
+</style>
+  
+{% else %}
+<div class = "alert alert-danger">Henüz deneyen olmadı...</div>
+{% endif %}
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Karla:400,700);
+
+    body {
+      margin: 0px;
+      padding: 0px;
+      background-color: #f1f1f1;
+      font-family: 'Karla', sans-serif;
+        color: #333;}
+    
+    /* Header */
+    header {
+      background-color: #333333;
+      margin: 0px 0px 40px 0px;
+      padding: 10px 0px 0px 0px;
+      min-height: 5px;
+      text-align: center;}
+    
+    h2 {
+      font-size: 180%;
+      margin: 0px;}
+    h2, h4 {
+      font-weight: normal;}
+    h4 {
+      color: #333;
+      display: inline-block;
+      font-size: 120%;
+      margin: 5px 0px 5px 0px;
+    }
+    
+    /* Filter and search options */
+    #price-range {
+      width: 370px;
+      margin: 10px auto 30px auto;
+      text-align: center;
+      font-weight: bold;}
+    #value-min, #value-max {width: 100px;}
+    #slider {margin: 30px 0px 30px 0px;}
+    input[type="number"] {margin: 0px 10px 0px 10px;}
+    /* Filter and search options */
+    #buttons, #search {
+      text-align: center;
+      margin-bottom: 30px;}
+    
+    /* Filter buttons */
+    button {
+      background-color: #d7d7d7;
+      border: none;
+      padding: 3px 10px 4px 10px;
+      border-radius: 4px;
+      color: #333;
+      font-family: 'Karla', sans-serif;
+      font-size: 100%;}
+    
+    button:hover, button.active {
+      background-color: #00cccc;
+      color: #fff;
+      cursor: pointer;}
+    
+    
+    /* Search input */
+    input {
+      font-size: 120%;
+      border: 1px solid #999;
+      padding: 5px;}
+    input:hover {
+      border: 1px solid #666;}
+    input:focus {
+      border: 1px solid #00cccc;
+      outline: none;}
+    
+    
+    /* Gallery of images */
+    #gallery {
+      text-align: center;
+      max-width: 102px;
+      margin: 0px auto;}
+    
+    #gallery img {
+      width: 300px;
+      height: 150px;
+      border-radius: 3px;
+      border: 8px solid #fff;
+      margin: 6px;
+        -webkit-box-shadow: 0 0 3px 3px #ebebeb;
+        box-shadow: 0 0 3px 3px #ebebeb;
+      float: left;}
+    
+    
+    /* Table styles */
+    table {
+      margin: 0px auto;
+      width: 780px;}
+    table#rates	{width: 380px;}
+    th, td {
+      border-radius: 3px;
+      color: #333;
+      padding: 7px 10px 5px 10px;
+      min-width: 1em;
+      text-align: left;}
+    th {
+      background-color: #d7d7d7;
+      font-weight: bold;
+      text-transform: uppercase;}
+    td {
+      background-color: #fff;}
+    table.sortable th:hover {
+      cursor: pointer;}
+    th.ascending, th.descending, table.sortable th:hover {
+      background-color: #00cccc;
+      color: #fff;}
+    
+    /* Arrows for table sorting */
+    th.ascending:after {
+      font-size: 60%;
+        content: '\25B2';
+        float: left;
+      padding: 4px 5px 0px 0px;}
+    th.descending:after {
+      font-size: 60%;
+        content: '\25BC';
+        float: left;
+      padding: 4px 5px 0px 0px;}
+    
+    .about {
+      width: 780px;
+      margin: 0px auto 40px auto;}
+    .about:after {
+      content: "";
+      display: table;
+      clear: both;}
+    .about h2 {text-align: left; float: left;}
+    
+    .bio {
+      float: right;
+      width: 195px;}
+    .bio img {
+      float: left;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script >
+    var compare = {                           // Declare compare object
+      name: function(a, b) {                  // Add a method called name
+        a = a.replace(/^the /i, '');          // Remove The from start of parameter
+        b = b.replace(/^the /i, '');          // Remove The from start of parameter
+    
+        if (a < b) {                          // If value a is less than value b
+          return -1;                          // Return -1
+        } else {                              // Otherwise
+          return a > b ? 1 : 0;               // If a is greater than b return 1 OR
+        }                                     // if they are the same return 0
+      },
+      duration: function(a, b) {              // Add a method called duration
+        a = a.split(':');                     // Split the time at the colon
+        b = b.split(':');                     // Split the time at the colon
+    
+        a = Number(a[0]) * 60 + Number(a[1]); // Convert the time to seconds
+        b = Number(b[0]) * 60 + Number(b[1]); // Convert the time to seconds
+    
+        return a - b;                         // Return a minus b
+      },
+      date: function(a, b) {                  // Add a method called date
+        a = new Date(a);                      // New Date object to hold the date
+        b = new Date(b);                      // New Date object to hold the date
+    
+        return a - b;                         // Return a minus b
+      }
+    };
+    
+    $('.sortable').each(function() {
+      var $table = $(this);                     // This sortable table
+      var $tbody = $table.find('tbody');        // Store table body
+      var $controls = $table.find('th');        // Store table headers
+      var rows = $tbody.find('tr').toArray();   // Store array containing rows
+    
+      $controls.on('click', function() {        // When user clicks on a header
+        var $header = $(this);                  // Get the header
+        var order = $header.data('sort');       // Get value of data-sort attribute
+        var column;                             // Declare variable called column
+    
+        // If selected item has ascending or descending class, reverse contents
+        if ($header.is('.ascending') || $header.is('.descending')) {  
+          $header.toggleClass('ascending descending');    // Toggle to other class
+          $tbody.append(rows.reverse());                // Reverse the array
+        } else {                                        // Otherwise perform a sort                            
+          $header.addClass('ascending');                // Add class to header
+          // Remove asc or desc from all other headers
+          $header.siblings().removeClass('ascending descending'); 
+          if (compare.hasOwnProperty(order)) {  // If compare object has method
+            column = $controls.index(this);         // Search for columnâ€™s index no
+    
+            rows.sort(function(a, b) {               // Call sort() on rows array
+              a = $(a).find('td').eq(column).text(); // Get text of column in row a
+              b = $(b).find('td').eq(column).text(); // Get text of column in row b
+              return compare[order](a, b);           // Call compare method
+            });
+    
+            $tbody.append(rows);
+          }
+        }
+      });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
+
+    <style>
+        body{
+          background-color: #398B93;}
+        
+      </style>
+{% endblock body %}

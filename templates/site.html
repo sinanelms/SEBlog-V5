@@ -1,0 +1,168 @@
+{% extends "layoutsite.html" %}
+{% block body %}
+
+{% from "includes/formhelpers.html" import render_field %}
+
+
+<div class ="jumbotron text-center">
+   <!--site2 /bilgi için-->  
+    <div class="container">                       
+      <form action="/sonuc" method= "post">
+        <div class="form-group">
+          <label  for="comment"><h4>İsim(ler):</h4> </label>
+           <textarea name="keyword" class="form-control" rows="5" id="comment" placeholder="Birden fazla isim yazmak istiyorsanız isimleri alt alta yazınız..."></textarea>
+        </div>
+        <hr>              
+       <button type="submit" class="btn btn-primary ">Başla</button>
+     </form>
+    </div>
+          <hr>
+          <p> <b>NOT:</b> <strong>Bir alt satıra geçmek için <kbd>Enter</kbd>  tuşunu kullanınız...</strong><br></p>
+          
+          <hr>
+
+          
+                      
+         
+          {% if son %}
+          Şimdiye kadar <strong>{{son.no}}</strong>  kişi denedi...</h4></p>
+          {% else %}
+          <strong>İlk deneyen siz olun</strong>
+          
+          {% endif %}
+          
+          <hr>
+          <section>
+              <!--for demo wrap-->
+              
+              <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                  <thead>
+                   <tr class="row100 head">
+                                      <th style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"class="cell100 column1 ">Mahal</th>
+                                      <th class="cell100 column2 ">Bölge</th>
+                                      <th class="cell100 column3 ">Teşkilatı</th>
+                                      <th class="cell100 column4 ">Acm</th>
+                                      <th class="cell100 column5 ">İlİ</th>
+                                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tbl-content">
+                <table id="AA"cellpadding="0" cellspacing="0" border="0">
+                 <tbody>
+                                      
+                                    {% for article in articles %}
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">{{article.yerler}}</td>
+                                        <td class="cell100 column2 ">{{article.bolge}}</td>
+                                        <td class="cell100 column3 ">{{article.teskilati}}</td>
+                                        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"class="cell100 column4 ">{{article.acm}}</td>
+                                        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"class="cell100 column5 ">{{article.ili}}</td>
+                                      </tr>  
+                                    {% endfor %}
+                                                        
+                                  </tbody>
+                </table>
+              </div>
+            </section>
+            
+            
+
+   
+            
+
+          
+        
+  
+          <!--girişler-->
+          <script id="_waukw6">var _wau = _wau || []; _wau.push(["dynamic", "v5t3j7m8h4", "kw6", "76a5afffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
+        
+       
+          </div>
+        </div>
+          
+        
+
+
+   <style>
+   
+
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(10, 233, 196, 0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0.4px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 8px 1px;
+  text-align: auto;
+  font-weight: auto;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+}
+td{
+  padding: 5px;
+  text-align: auto;
+  vertical-align:middle;
+  font-weight: auto;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+
+/* demo styles */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+table{
+  
+  background: linear-gradient(to right,  #1c2049, #3a87fc);
+  font-family: 'Roboto', sans-serif;
+}
+section{
+  margin: 2px;
+}
+
+
+
+
+
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 9px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(100, 248, 216, 0.911); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}  
+   </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script>
+     // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+   </script>     
+          
+ 
+   <style>
+      body{
+        background-color: #398B93;}
+      
+    </style>
+
+{% endblock body %}
