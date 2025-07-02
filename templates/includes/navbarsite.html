@@ -1,37 +1,364 @@
 <div class="container">
+    <section class="navigation">
+        <div class="nav-container">
+            <div class="brand">
+                <a href="/">
+                    <i class="fas fa-balance-scale me-2"></i>
+                    Hakim & Savcı Atama
+                </a>
+            </div>
+            <nav>
+                <div class="nav-mobile">
+                    <a id="nav-toggle" href="#!">
+                        <span></span>
+                    </a>
+                </div>
+                <ul class="nav-list">
+                    <!-- <li>
+                        <a href="/maps">
+                            <i class="fas fa-map-marked-alt me-1"></i>
+                            Haritalar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/resimler">
+                            <i class="fas fa-images me-1"></i>
+                            Resimler
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/iletisim">
+                            <i class="fas fa-envelope me-1"></i>
+                            İletişim
+                        </a>
+                    </li> -->
+                </ul>
+            </nav>
+        </div>
+    </section>   
+     
+<style>
+    @charset "UTF-8";
+    .navigation {
+        height: 70px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .navigation.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: var(--shadow-light);
+    }
+    
+    .brand {
+        position: absolute;
+        padding-left: 20px;
+        float: left;
+        line-height: 70px;
+        text-transform: none;
+        font-size: 1.4em;
+    }
+    
+    .brand a,
+    .brand a:visited {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 800;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    .brand a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-1px);
+    }
+    
+    .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    nav {
+        float: right;
+    }
+    
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        float: left;
+        position: relative;
+    }
+    
+    nav ul li a,
+    nav ul li a:visited {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        line-height: 70px;
+        background: transparent;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    nav ul li a:hover,
+    nav ul li a:visited:hover {
+        color: var(--primary-color);
+        background: transparent;
+        transform: translateY(-2px);
+    }
+    
+    nav ul li a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background: var(--gradient-primary);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
+    
+    nav ul li a:hover::after {
+        width: 80%;
+    }
+    
+    nav ul li a.active::after {
+        width: 80%;
+        background: var(--gradient-secondary);
+    }
+    
+    nav ul li a:not(:only-child):after,
+    nav ul li a:visited:not(:only-child):after {
+        padding-left: 4px;
+        content: " ▾";
+    }
+    
+    nav ul li ul li {
+        min-width: 190px;
+    }
+    
+    nav ul li ul li a {
+        padding: 15px;
+        line-height: 20px;
+    }
+    
+    .nav-dropdown {
+        position: absolute;
+        display: none;
+        z-index: 1;
+        box-shadow: var(--shadow-medium);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    /* Mobile navigation */
+    .nav-mobile {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 27px;
+        background: var(--primary-color);
+        height: 70px;
+        width: 70px;
+        border-radius: 0 0 0 20px;
+    }
+    
+    @media only screen and (max-width: 798px) {
+        .nav-mobile {
+            display: block;
+        }
+    
+        nav {
+            width: 100%;
+            padding: 70px 0 15px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+        
+        nav ul {
+            display: none;
+        }
+        
+        nav ul li {
+            float: none;
+        }
+        
+        nav ul li a {
+            padding: 15px 20px;
+            line-height: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        nav ul li a::after {
+            display: none;
+        }
+        
+        nav ul li ul li a {
+            padding-left: 40px;
+        }
+    
+        .nav-dropdown {
+            position: static;
+        }
+    }
+    
+    @media screen and (min-width: 799px) {
+        .nav-list {
+            display: block !important;
+        }
+    }
+    
+    #nav-toggle {
+        position: absolute;
+        left: 18px;
+        top: 22px;
+        cursor: pointer;
+        padding: 10px 35px 16px 0px;
+    }
+    
+    #nav-toggle span,
+    #nav-toggle span:before,
+    #nav-toggle span:after {
+        cursor: pointer;
+        border-radius: 1px;
+        height: 5px;
+        width: 35px;
+        background: white;
+        position: absolute;
+        display: block;
+        content: "";
+        transition: all 300ms ease-in-out;
+    }
+    
+    #nav-toggle span:before {
+        top: -10px;
+    }
+    
+    #nav-toggle span:after {
+        bottom: -10px;
+    }
+    
+    #nav-toggle.active span {
+        background-color: transparent;
+    }
+    
+    #nav-toggle.active span:before, 
+    #nav-toggle.active span:after {
+        top: 0;
+    }
+    
+    #nav-toggle.active span:before {
+        transform: rotate(45deg);
+    }
+    
+    #nav-toggle.active span:after {
+        transform: rotate(-45deg);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .navigation {
+            height: 60px;
+        }
+        
+        .brand {
+            line-height: 60px;
+            font-size: 1.2em;
+        }
+        
+        .nav-mobile {
+            height: 60px;
+            width: 60px;
+        }
+        
+        #nav-toggle {
+            top: 17px;
+        }
+        
+        nav ul li a {
+            line-height: 60px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .navigation {
+            height: 45px;
+        }
+        .brand {
+            font-size: 0.9em;
+            padding-left: 8px;
+            line-height: 45px;
+        }
+        .brand a {
+            font-size: 0.8em;
+        }
+        .nav-mobile {
+            height: 45px;
+            width: 45px;
+        }
+        #nav-toggle {
+            top: 10px;
+        }
+        nav ul li a {
+            padding: 8px 10px;
+            font-size: 0.8em;
+            line-height: 45px;
+        }
+    }
+    
+    article {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px;
+    }
+</style>
 
-
-
-
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
-    <a class="navbar-brand" href="/">SEBlog</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>    
-      
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/adli">Adli Veri</a>
-          </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/maps">Haritalar</a>
-        </li><li class="nav-item active">
-            <a class="nav-link" href="/resimler">Resimler</a>
-          </li>
-         </ul>    
-                   
-        <ul class="navbar-nav ml-auto"> 
-            <li class="nav-item active">
-              <a class="nav-link" href="/iletisim">İletişim</a>
-            </li> 
+<script>
+    (function($) { // Begin jQuery
+        $(function() { // DOM ready
+            // If a link has a dropdown, add sub menu toggle.
+            $('nav ul li a:not(:only-child)').click(function(e) {
+                $(this).siblings('.nav-dropdown').toggle();
+                // Close one dropdown when selecting another
+                $('.nav-dropdown').not($(this).siblings()).hide();
+                e.stopPropagation();
+            });
             
-          </ul>
-    </div>
-  </nav>
-
-
+            // Clicking away from dropdown will remove the dropdown class
+            $('html').click(function() {
+                $('.nav-dropdown').hide();
+            });
+            
+            // Toggle open and close nav styles on click
+            $('#nav-toggle').click(function() {
+                $('nav ul').slideToggle();
+                $(this).toggleClass('active');
+            });
+            
+            // Hamburger to X toggle
+            $('#nav-toggle').on('click', function() {
+                this.classList.toggle('active');
+            });
+        }); // end DOM ready
+    })(jQuery); // end jQuery
+</script>
 </div>
 
 

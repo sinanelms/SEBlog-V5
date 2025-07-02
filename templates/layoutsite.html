@@ -1,129 +1,155 @@
-
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
   <head>
-    {% block head %}
-    
-    {% endblock head %}
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/static/cssjs/css/bootstrap.min.css">
-    <!-- iletişim için-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--Ekran Görüntüsü-->
-
-    <!--Text-->
-    <link href="https://fonts.googleapis.com/css?family=Lora:700i" rel="stylesheet">
-  <!--Türkiye-->
-  
-  <script type="text/javascript" src="/static/Turkey/js/raphael-min.js"></script>
-
-  <script type="text/javascript" src="/static/Turkey/js/paths.js"></script>
-  
-  <script type="text/javascript" src="/static/Turkey/js/turkiye.js?v=123"></script>
-  
-  <script type="text/javascript" src="/static/Turkey/js/jquery.qtip.min.js"></script>
+    {% block head %}{% endblock head %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Hakim ve Savcı adayları için modern online atama sistemi." />
+    <meta name="keywords" content="Hakim, Savcı, Atama, Kura, Adalet Akademisi, Online Kura, Türkiye Haritası, Bölge Seçimi" />
+    <link rel="shortcut icon" href="http://library.ust.hk/wp-content/uploads/2016/10/SE-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hakim & Savcı Atama Sistemi" />
+    <meta property="og:url" content="http://adli.pythonanywhere.com/" />
+    <meta property="og:title" content="Hakim & Savcı Atama Sistemi - Modern Online Kura Platformu" />
+    <meta property="og:description" content="Hakim ve Savcı adayları için özel olarak tasarlanmış modern online atama sistemi." />
+    <meta property="og:image" content="http://library.ust.hk/wp-content/uploads/2016/10/SE-icon.png" />
+    <meta property="og:locale" content="tr_TR" />
+    <link rel="stylesheet" href="/static/cssjs/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.qtip.min.css" />
     <style>
-        body {
-          font-family: 'Lora', serif;
-          
-        }
-
-   
-    .tablesorter-pager .btn-group-sm .btn {
-      font-size: 1.2em; /* make pager arrows more visible */
-    }
+      :root {
+        --primary-color: #667eea;
+        --secondary-color: #764ba2;
+        --accent-color: #f093fb;
+        --success-color: #4facfe;
+        --warning-color: #43e97b;
+        --danger-color: #fa709a;
+        --dark-color: #2d3748;
+        --light-color: #f7fafc;
+        --text-primary: #2d3748;
+        --text-secondary: #718096;
+        --border-color: #e2e8f0;
+        --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+        --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+        --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
+        --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      }
+      * { box-sizing: border-box; }
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--light-color);
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      .navigation {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        transition: all 0.3s ease;
+      }
+      .navigation.scrolled { background: rgba(255,255,255,0.98); box-shadow: var(--shadow-light); }
+      .brand a { color: var(--primary-color) !important; font-weight: 800; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; }
+      .brand a:hover { color: var(--secondary-color) !important; transform: translateY(-1px); }
+      nav ul li a { color: var(--text-primary) !important; font-weight: 500; transition: all 0.3s ease; position: relative; }
+      nav ul li a:hover { color: var(--primary-color) !important; background: transparent !important; }
+      nav ul li a::after { content: ""; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--gradient-primary); transition: all 0.3s ease; transform: translateX(-50%); }
+      nav ul li a:hover::after { width: 100%; }
+      #loader { position: fixed; left: 50%; top: 50%; z-index: 9999; width: 120px; height: 120px; margin: -60px 0 0 -60px; border: 4px solid var(--border-color); border-radius: 50%; border-top: 4px solid var(--primary-color); animation: spin 1s linear infinite; }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .animate-bottom { position: relative; animation-name: animatebottom; animation-duration: 1s; }
+      @keyframes animatebottom { from { bottom: -100px; opacity: 0; } to { bottom: 0; opacity: 1; } }
+      #myDiv { display: none; text-align: center; }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: var(--light-color); }
+      ::-webkit-scrollbar-thumb { background: var(--gradient-primary); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--gradient-secondary); }
+      @media (max-width: 768px) {
+        .navigation { padding: 0.5rem 0; }
+        .brand a { font-size: 1.25rem; }
+        nav ul li a { padding: 0.75rem 1rem !important; font-size: 0.9rem; }
+      }
+      html { scroll-behavior: smooth; }
+      *:focus { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+      .btn { transition: all 0.3s ease; border-radius: 8px; font-weight: 500; }
+      .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-medium); }
+      .card { transition: all 0.3s ease; border-radius: 12px; border: 1px solid var(--border-color); }
+      .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-medium); }
+      .form-control { border-radius: 8px; border: 2px solid var(--border-color); transition: all 0.3s ease; }
+      .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+      .table { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-light); }
+      .table thead th { background: var(--gradient-primary); color: white; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+      .table tbody tr { transition: all 0.3s ease; }
+      .table tbody tr:hover { background: rgba(102,126,234,0.05); transform: scale(1.01); }
+      .alert { border-radius: 12px; border: none; font-weight: 500; }
+      .alert-success { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+      .alert-danger { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+      .alert-warning { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: var(--text-primary); }
+      .alert-info { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: var(--text-primary); }
     </style>
-
-    <style>
-      /* Center the loader */
-      #loader {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        z-index: 1;
-        width: 150px;
-        height: 150px;
-        margin: -75px 0 0 -75px;
-        border: 16px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 16px solid #3498db;
-        width: 120px;
-        height: 120px;
-        -webkit-animation: spin 2s linear infinite;
-        animation: spin 2s linear infinite;
-      }
-      
-      @-webkit-keyframes spin {
-        0% { -webkit-transform: rotate(0deg); }
-        100% { -webkit-transform: rotate(360deg); }
-      }
-      
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
-      /* Add animation to "page content" */
-      .animate-bottom {
-        position: relative;
-        -webkit-animation-name: animatebottom;
-        -webkit-animation-duration: 1s;
-        animation-name: animatebottom;
-        animation-duration: 1s
-      }
-      
-      @-webkit-keyframes animatebottom {
-        from { bottom:-100px; opacity:0 } 
-        to { bottom:0px; opacity:1 }
-      }
-      
-      @keyframes animatebottom { 
-        from{ bottom:-100px; opacity:0 } 
-        to{ bottom:0; opacity:1 }
-      }
-      
-      #myDiv {
-        display: none;
-        text-align: center;
-      }
-      </style>
-
-
-    <title>
-        SE Blog
-    </title>
-</head>
-<body onload="myFunction()" style="margin:0;">
+    <title>Hakim & Savcı Atama Sistemi - Modern Online Kura Platformu</title>
+  </head>
+  <body onload="myFunction()" style="margin:0">
+    <div id="loader"></div>
     {% include "includes/navbarsite.html" %}
-    <div class="container">
+    
+
+    <br>
+    <br>
+    <div id="myDiv" class="animate-bottom">
+      <div class="container-fluid p-0">
         {% include "includes/messages.html" %}
-            {% block body %}
-            
-
-
-            {% endblock body %}
-
+        {% block body %}{% endblock body %}
+      </div>
     </div>
-    
-    <style> 
-        body {
-            background-image: url("background.jpg");
-            
-        }
-      </style> 
-    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-    
-    <script src="/static/cssjs/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/static/cssjs/js/popper.min.js"></script>
     <script src="/static/cssjs/js/bootstrap.min.js"></script>
-  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b9cdd73d736cb7a"></script>
-  <div class="addthis_inline_share_toolbox"></div>
-</body>
+    <script src="/static/js/raphael-min.js"></script>
+    <script src="/static/js/paths.js"></script>
+    <script src="/static/js/turkiye.js?v=123"></script>
+    <script src="/static/js/jquery.qtip.min.js"></script>
+    <script src="/static/js/bilgi.js"></script>
+    <script>
+      window.addEventListener("scroll", function () {
+        const navigation = document.querySelector(".navigation");
+        if (window.scrollY > 50) {
+          navigation.classList.add("scrolled");
+        } else {
+          navigation.classList.remove("scrolled");
+        }
+      });
+      function myFunction() {
+        setTimeout(function () {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }, 1000);
+      }
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+      const currentLocation = location.pathname;
+      document.querySelectorAll(".nav-list a").forEach((link) => {
+        if (link.getAttribute("href") === currentLocation) {
+          link.classList.add("active");
+        }
+      });
+    </script>
+  </body>
 </html>

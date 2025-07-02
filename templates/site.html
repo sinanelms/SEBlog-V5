@@ -1,168 +1,893 @@
-{% extends "layoutsite.html" %}
-{% block body %}
+{% extends "layoutsite.html" %} {% block body %} {% from
+"includes/formhelpers.html" import render_field %}
 
-{% from "includes/formhelpers.html" import render_field %}
+<audio id="myAudio" src="/static/far2.mp3"></audio>
 
-
-<div class ="jumbotron text-center">
-   <!--site2 /bilgi için-->  
-    <div class="container">                       
-      <form action="/sonuc" method= "post">
-        <div class="form-group">
-          <label  for="comment"><h4>İsim(ler):</h4> </label>
-           <textarea name="keyword" class="form-control" rows="5" id="comment" placeholder="Birden fazla isim yazmak istiyorsanız isimleri alt alta yazınız..."></textarea>
-        </div>
-        <hr>              
-       <button type="submit" class="btn btn-primary ">Başla</button>
-     </form>
-    </div>
-          <hr>
-          <p> <b>NOT:</b> <strong>Bir alt satıra geçmek için <kbd>Enter</kbd>  tuşunu kullanınız...</strong><br></p>
-          
-          <hr>
-
-          
-                      
-         
-          {% if son %}
-          Şimdiye kadar <strong>{{son.no}}</strong>  kişi denedi...</h4></p>
-          {% else %}
-          <strong>İlk deneyen siz olun</strong>
-          
-          {% endif %}
-          
-          <hr>
-          <section>
-              <!--for demo wrap-->
-              
-              <div class="tbl-header">
-                <table cellpadding="0" cellspacing="0" border="0">
-                  <thead>
-                   <tr class="row100 head">
-                                      <th style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"class="cell100 column1 ">Mahal</th>
-                                      <th class="cell100 column2 ">Bölge</th>
-                                      <th class="cell100 column3 ">Teşkilatı</th>
-                                      <th class="cell100 column4 ">Acm</th>
-                                      <th class="cell100 column5 ">İlİ</th>
-                                    </tr>
-                  </thead>
-                </table>
-              </div>
-              <div class="tbl-content">
-                <table id="AA"cellpadding="0" cellspacing="0" border="0">
-                 <tbody>
-                                      
-                                    {% for article in articles %}
-                                    <tr class="row100 body">
-                                        <td class="cell100 column1">{{article.yerler}}</td>
-                                        <td class="cell100 column2 ">{{article.bolge}}</td>
-                                        <td class="cell100 column3 ">{{article.teskilati}}</td>
-                                        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"class="cell100 column4 ">{{article.acm}}</td>
-                                        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"class="cell100 column5 ">{{article.ili}}</td>
-                                      </tr>  
-                                    {% endfor %}
-                                                        
-                                  </tbody>
-                </table>
-              </div>
-            </section>
-            
-            
-
-   
-            
-
-          
-        
-  
-          <!--girişler-->
-          <script id="_waukw6">var _wau = _wau || []; _wau.push(["dynamic", "v5t3j7m8h4", "kw6", "76a5afffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
-        
-       
+<!-- Hero Section -->
+<div class="hero-section">
+  <div class="hero-background">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div
+      class="container d-flex flex-column align-items-center justify-content-center"
+      style="min-height: 100vh"
+    >
+      <!-- <div class="hero-text mb-4" data-aos="fade-down">
+        <h1 class="hero-title">
+          <span class="text-gradient">Hakim & Savcı</span>
+          <br />Atama Sistemi
+        </h1>
+        <p class="hero-subtitle">
+          Türkiye'nin en güvenilir online kura çekme platformu. Adalet Akademisi
+          mezunları için özel olarak tasarlanmıştır.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number" data-count="{{son.no}}">0</div>
+            <div class="stat-label">Başarılı Atama</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Bölge</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">81</div>
+            <div class="stat-label">İl</div>
           </div>
         </div>
-          
+      </div> -->
+      <div class="main-card main-card-large shadow-lg" data-aos="fade-up">
+        <div class="row g-0 flex-column">
+          <!-- Harita ve Bölge Seçimi -->
+          <div class="col-12 d-flex flex-column align-items-center justify-content-center p-1">
+            <div class="map-card map-card-large">
+              <div class="region-selection region-selection-on-map">
+                <h5>Bölge Seçimi</h5>
+                <div class="region-grid">
+                  <label class="region-checkbox">
+                    <input
+                      type="checkbox"
+                      name="bolge"
+                      value="all"
+                      id="bolge-all"
+                      checked
+                    />
+                    <span class="checkmark">Hepsi</span>
+                  </label>
+                  <label class="region-checkbox">
+                    <input type="checkbox" name="bolge" value="1" />
+                    <span class="checkmark">Bölge 1</span>
+                  </label>
+                  <label class="region-checkbox">
+                    <input type="checkbox" name="bolge" value="2" />
+                    <span class="checkmark">Bölge 2</span>
+                  </label>
+                  <label class="region-checkbox">
+                    <input type="checkbox" name="bolge" value="3" />
+                    <span class="checkmark">Bölge 3</span>
+                  </label>
+                  <label class="region-checkbox">
+                    <input type="checkbox" name="bolge" value="4" />
+                    <span class="checkmark">Bölge 4</span>
+                  </label>
+                  <label class="region-checkbox">
+                    <input type="checkbox" name="bolge" value="5" />
+                    <span class="checkmark">Bölge 5</span>
+                  </label>
+                </div>
+              </div>
+              <div id="map"></div>
+            </div>
+          </div>
+          <!-- Form Alanı -->
+          <div class="col-12 d-flex flex-column justify-content-center p-3">
         
+            <!-- <div class="card-header text-center mb-3">
+              <h3 class="mb-1">Kura Çekme Sistemi</h3>
+              <p class="mb-0">Bölge seçin ve isimlerinizi girin</p>
+            </div> -->
+            <!-- İsim Girişi -->
+            <div class="name-input-section mb-3">
+              <h5>İsim Girişi</h5>
+              <div class="input-group">
+                <textarea
+                  id="user-message"
+                  class="form-control modern-textarea"
+                  rows="3"
+                  name="deger"
+                  placeholder="İsimler arasına virgül (,) koyarak birden çok isim girebilirsiniz..."
+                ></textarea>
+              </div>
+            </div>
+            <!-- Başlat Butonu -->
+            <div class="action-section mt-2">
+              <button
+                type="button"
+                class="btn btn-primary btn-lg btn-animated w-100"
+                onclick="donen()"
+              >
+                <span class="btn-text">Kura Çek</span>
+                <span class="btn-icon">🎯</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Atama Sonuçları alanı kartın hemen altında -->
+      <div class="results-section results-section-below mt-4 w-100">
+        <div class="results-container" data-aos="fade-up">
+          <div class="results-header">
+            <h3>Atama Sonuçları</h3>
+          </div>
+          <div class="table-responsive">
+            <table id="userdata" class="modern-table">
+              <thead>
+                <tr>
+                  <th>Resim</th>
+                  <th>İsim</th>
+                  <th>Yer</th>
+                  <th>Bölge</th>
+                  <th>İli</th>
+                  <th>Teşkilatı</th>
+                  <th>ACM</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modern CSS Styles -->
+<style>
+  :root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
+    --success-color: #4facfe;
+    --warning-color: #43e97b;
+    --danger-color: #fa709a;
+    --dark-color: #2d3748;
+    --light-color: #f7fafc;
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --border-color: #e2e8f0;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    background: #f4f7fb;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    background: var(--gradient-primary);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-top: 70px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-section {
+      padding-top: 0;
+    }
+  }
+
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+    background-size: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .text-gradient {
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .main-card {
+    background: white;
+    border-radius: 32px;
+    box-shadow: var(--shadow-heavy);
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-card-large {
+    max-width: 1400px;
+  }
+
+  @media (min-width: 992px) {
+    .main-card-large .col-lg-8 {
+      flex: 0 0 66.6667%;
+      max-width: 66.6667%;
+    }
+    .main-card-large .col-lg-4 {
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+    }
+  }
+
+  .map-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .map-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+  }
+
+  .map-card-large {
+    min-height: 400px;
+    min-width: 100%;
+  }
+
+  #map {
+    margin-top: 0;
+  }
+
+  .card-header h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+
+  .region-selection h5,
+  .name-input-section h5 {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .region-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .region-checkbox {
+    position: relative;
+    cursor: pointer;
+    display: block;
+  }
+
+  .region-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkmark {
+    display: block;
+    padding: 0.6rem 0.8rem;
+    background: var(--light-color);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+  }
+
+  .region-checkbox input:checked + .checkmark {
+    background: var(--gradient-primary) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    font-weight: 700;
+    opacity: 1;
+  }
+
+  .region-checkbox .checkmark {
+    opacity: 0.7;
+    transition: all 0.2s;
+  }
+
+  .region-checkbox input:checked + .checkmark {
+    opacity: 1;
+  }
+
+  .modern-textarea {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .modern-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .btn-animated {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-animated:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-heavy);
+    color: white;
+  }
+
+  .btn-animated:active {
+    transform: translateY(-1px);
+  }
+
+  .btn-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-animated:hover .btn-icon {
+    transform: rotate(15deg);
+  }
+
+  .results-section-below {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .results-container {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .results-header h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
 
 
-   <style>
-   
 
-table{
-  width:100%;
-  table-layout: fixed;
-}
-.tbl-header{
-  background-color: rgba(10, 233, 196, 0.3);
- }
-.tbl-content{
-  height:300px;
-  overflow-x:auto;
-  margin-top: 0.4px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-th{
-  padding: 8px 1px;
-  text-align: auto;
-  font-weight: auto;
-  font-size: 15px;
-  color: rgb(255, 255, 255);
-  text-transform: uppercase;
-}
-td{
-  padding: 5px;
-  text-align: auto;
-  vertical-align:middle;
-  font-weight: auto;
-  font-size: 12px;
-  color: #fff;
-  border-bottom: solid 1px rgba(255,255,255,0.1);
-}
+  .modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+  }
 
+  .modern-table thead {
+    background: var(--gradient-primary);
+  }
 
-/* demo styles */
+  .modern-table th {
+    color: white;
+    font-weight: 600;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-table{
-  
-  background: linear-gradient(to right,  #1c2049, #3a87fc);
-  font-family: 'Roboto', sans-serif;
-}
-section{
-  margin: 2px;
-}
+  .modern-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
 
+  .modern-table tbody tr {
+    transition: all 0.3s ease;
+  }
 
+  .modern-table tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05);
+    transform: scale(1.01);
+  }
 
+  .modern-table tbody tr:nth-child(even) {
+    background: rgba(247, 250, 252, 0.5);
+  }
 
+  .aaa {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+  }
 
+  @media (max-width: 1400px) {
+    .main-card-large {
+      max-width: 98vw;
+    }
+    .map-card-large {
+      min-height: 350px;
+      padding: 1.2rem;
+    }
+  }
 
-/* for custom scrollbar for webkit browser*/
+  @media (max-width: 991px) {
+    .main-card-large {
+      max-width: 100vw;
+    }
+    .map-card-large {
+      min-height: 250px;
+      padding: 0.7rem;
+    }
+    #map {
+      min-height: 220px;
+    }
+    .results-container {
+      padding: 1rem;
+    }
+  }
 
-::-webkit-scrollbar {
-    width: 9px;
-} 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(100, 248, 216, 0.911); 
-} 
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-}  
-   </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-   <script>
-     // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
-$(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
-   </script>     
-          
- 
-   <style>
-      body{
-        background-color: #398B93;}
-      
-    </style>
+  @media (max-width: 767px) {
+    .main-card-large {
+      flex-direction: column;
+      border-radius: 18px;
+      max-width: 100vw;
+    }
+    .map-card-large {
+      min-height: 180px;
+      padding: 0.5rem;
+    }
+    #map {
+      min-height: 160px;
+    }
+    .hero-title {
+      font-size: 2.2rem;
+    }
+    .hero-stats {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .results-section-below {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .results-container {
+      border-radius: 12px;
+      padding: 0.5rem;
+    }
+    .results-header h3 {
+      font-size: 1.1rem;
+    }
+    .results-header {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+      padding-bottom: 0.5rem;
+    }
+    .modern-table th,
+    .modern-table td {
+      padding: 0.5rem 0.25rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .main-card-large {
+      border-radius: 10px;
+      padding: 0.5rem;
+    }
+    .map-card-large {
+      min-height: 120px;
+    }
+    #map {
+      min-height: 90px;
+    }
+    .hero-title {
+      font-size: 1.3rem;
+    }
+    .modern-table th,
+    .modern-table td {
+      padding: 0.5rem 0.15rem;
+      font-size: 0.7rem;
+    }
+  }
+
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .region-selection-on-map {
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+  }
+  @media (max-width: 991px) {
+    .region-selection-on-map {
+        padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+    }
+  }
+  @media (max-width: 576px) {
+    .region-selection-on-map {
+        padding: 0.3rem 0.1rem 0.1rem 0.1rem;
+    }
+  }
+</style>
+
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  // Initialize AOS
+  document.addEventListener("DOMContentLoaded", function () {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false,
+    });
+    animateCounters();
+  });
+
+  function animateCounters() {
+    const counters = document.querySelectorAll("[data-count]");
+    counters.forEach((counter) => {
+      const target = parseInt(counter.getAttribute("data-count"));
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        counter.textContent = Math.floor(current);
+      }, 16);
+    });
+  }
+
+  function updateResultCounter() {
+    const tbody = document.querySelector("#userdata tbody");
+    const count = tbody.children.length;
+    document.getElementById("resultCount").textContent = count;
+  }
+
+  $(document).ready(function () {
+    var bolgeIlMap = {};
+    $.getJSON("/static/yer.json", function (data) {
+      data.forEach(function (yer) {
+        if (yer.bolge && yer.ili) {
+          if (!bolgeIlMap[yer.bolge]) {
+            bolgeIlMap[yer.bolge] = [];
+          }
+          if (bolgeIlMap[yer.bolge].indexOf(yer.ili) === -1) {
+            bolgeIlMap[yer.bolge].push(yer.ili);
+          }
+        }
+      });
+      $("#bolge-all").prop("checked", true);
+      $('input[name="bolge"]').not('#bolge-all').prop("checked", false);
+    }).fail(function () {
+      console.error("HATA: yer.json dosyası yüklenemedi.");
+      alert(
+        "Harita için gerekli olan bölge verileri yüklenemedi. Lütfen sayfayı yenileyin."
+      );
+    });
+
+    $("#bolge-all").on("change", function () {
+      if ($(this).is(":checked")) {
+        $('input[name="bolge"]').not(this).prop("checked", false);
+      }
+      updateMapColors();
+    });
+    $('input[name="bolge"]').not("#bolge-all").on("change", function () {
+      if ($('input[name="bolge"]:checked').not('#bolge-all').length > 0) {
+        $("#bolge-all").prop("checked", false);
+      } else {
+        $("#bolge-all").prop("checked", true);
+      }
+      updateMapColors();
+    });
+
+    function updateMapColors() {
+      if (
+        typeof allobjs === "undefined" ||
+        allobjs.length === 0 ||
+        typeof paths === "undefined"
+      ) {
+        console.error("Harita nesneleri (allobjs, paths) henüz hazır değil.");
+        return;
+      }
+      if (Object.keys(bolgeIlMap).length === 0) {
+        console.error("Bölge-İl eşlemesi (bolgeIlMap) henüz hazır değil.");
+        return;
+      }
+      var selectedBolgeler = [];
+      $('input[name="bolge"]:checked').each(function () {
+        selectedBolgeler.push($(this).val());
+      });
+      if (selectedBolgeler.includes("all") || selectedBolgeler.length === 0) {
+        for (var i = 0; i < allobjs.length; i++) {
+          if (allobjs[i].id && allobjs[i].id !== "blank") {
+            allobjs[i].attr({ fill: "#E0E0E0" });
+          }
+        }
+        return;
+      }
+      var illerInSelectedBolgeler = [];
+      selectedBolgeler.forEach(function (bolge) {
+        if (bolgeIlMap[bolge]) {
+          illerInSelectedBolgeler = illerInSelectedBolgeler.concat(
+            bolgeIlMap[bolge]
+          );
+        }
+      });
+      for (var i = 0; i < allobjs.length; i++) {
+        if (allobjs[i].id && allobjs[i].id !== "blank") {
+          var ilAdi = paths[allobjs[i].id].name;
+          if (illerInSelectedBolgeler.includes(ilAdi)) {
+            allobjs[i].attr({ fill: "#E0E0E0" });
+          } else {
+            allobjs[i].attr({ fill: "#d3d3d3" });
+          }
+        }
+      }
+    }
+  });
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function donen() {
+    var deger = $("textarea[name=deger]").val();
+    var parcalar = deger.split(",");
+    var seciliBolgeler = [];
+    $('input[name="bolge"]:checked').each(function () {
+      seciliBolgeler.push($(this).val());
+    });
+    if (seciliBolgeler.length === 0 || seciliBolgeler.includes("all")) {
+      seciliBolgeler = ["1", "2", "3", "4", "5"];
+    }
+    if (seciliBolgeler.length === 0) {
+      alert("Lütfen en az bir bölge seçiniz!");
+      return;
+    }
+    const btn = document.querySelector(".btn-animated");
+    const originalText = btn.innerHTML;
+    btn.innerHTML =
+      '<span class="loading-spinner"></span> <span>İşleniyor...</span>';
+    btn.disabled = true;
+    tblR = "<tr style='display:none;'>" + "<td>" + "</td>" + "</tr>";
+    $("tbody").append(tblR);
+    for (let y = 0; y < parcalar.length; y++) {
+      let bulundu = false;
+      while (!bulundu) {
+        for (let i = 0; i < 20; i++) {
+          await sleep(200);
+          random();
+        }
+        bulundu = await bilgi(parcalar[y], seciliBolgeler);
+        await sleep(1000);
+      }
+    }
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+    updateResultCounter();
+  }
+
+  function random() {
+    var x = document.getElementById("myAudio");
+    var random = Math.floor(Math.random() * (allobjs.length - 1)) + 1;
+    if (allobjs[random].id != "blank") {
+      allobjs[random].animate({ fill: "#fff" }, 400);
+      allobjs[random].animate({ fill: "#ffff" }, 200);
+      x.play();
+    }
+  }
+
+  function bilgi(deger, seciliBolgeler) {
+    return new Promise((resolve, reject) => {
+      var random = Math.floor(Math.random() * (allobjs.length - 1)) + 1;
+      if (allobjs[random].id != "blank") {
+        $.getJSON("/static/yer.json", function (data) {
+          var al = [];
+          $.each(data, function (i, f) {
+            if (f.plaka == random && seciliBolgeler.includes(f.bolge)) {
+              var al1 = [deger, f.yerler, f.bolge, f.ili, f.teskilati, f.acm];
+              al.push(al1);
+            }
+          });
+          if (al.length > 0) {
+            allobjs[random].animate({ fill: "#FF3535" }, 2000);
+            var randm = Math.floor(Math.random() * al.length);
+            $.ajax({
+              url: "/",
+              type: "POST",
+              dataType: "json",
+              data: JSON.stringify(al[randm]),
+              contentType: "application/json; charset=UTF-8",
+            })
+              .done(function (data) {
+                console.log("Veri başarıyla kaydedildi:", data);
+              })
+              .fail(function (xhr, status, error) {
+                console.error("Veri kaydetme hatası:", error);
+              });
+            var tblRow =
+              "<tr>" +
+              "<td>" +
+              "<img class='aaa'src='/static/bayrak.jpg' alt='' />" +
+              "</td>" +
+              "<td>" +
+              al[randm][0] +
+              "</td>" +
+              "<td>" +
+              al[randm][1] +
+              "</td>" +
+              "<td>" +
+              al[randm][2] +
+              "</td>" +
+              "<td>" +
+              al[randm][3] +
+              "</td>" +
+              "<td>" +
+              al[randm][4] +
+              "</td>" +
+              "<td>" +
+              al[randm][5] +
+              "</td>" +
+              "</tr>";
+            $("tbody").append(tblRow);
+            resolve(true);
+          } else {
+            console.log("Bu plaka için veri bulunamadı:", random);
+            resolve(false);
+          }
+        });
+      } else {
+        console.log($("tbody").parents("tr").text());
+        resolve(false);
+      }
+    });
+  }
+</script>
 
 {% endblock body %}
