@@ -56,7 +56,7 @@
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border-color);
         position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-        transition: all 0.3s ease;
+        transition: transform 0.35s cubic-bezier(.4,2,.6,1), background 0.3s;
       }
       .navigation.scrolled { background: rgba(255,255,255,0.98); box-shadow: var(--shadow-light); }
       .brand a { color: var(--primary-color) !important; font-weight: 800; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; }
@@ -103,9 +103,6 @@
     <div id="loader"></div>
     {% include "includes/navbarsite.html" %}
     
-
-    <br>
-    <br>
     <div id="myDiv" class="animate-bottom">
       <div class="container-fluid p-0">
         {% include "includes/messages.html" %}
@@ -123,10 +120,12 @@
     <script>
       window.addEventListener("scroll", function () {
         const navigation = document.querySelector(".navigation");
-        if (window.scrollY > 50) {
-          navigation.classList.add("scrolled");
-        } else {
-          navigation.classList.remove("scrolled");
+        if (navigation) {
+          if (window.scrollY > 50) {
+            navigation.classList.add("scrolled");
+          } else {
+            navigation.classList.remove("scrolled");
+          }
         }
       });
       function myFunction() {
@@ -150,6 +149,22 @@
           link.classList.add("active");
         }
       });
+
+      // Navbar scroll ile gizle/göster
+      let lastScrollTop = 0;
+      const nav = document.querySelector('.navigation');
+      window.addEventListener('scroll', function() {
+        if (!nav) return;
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st > lastScrollTop && st > 70) {
+          // aşağı kaydırıyor
+          nav.style.transform = 'translateY(-100%)';
+        } else {
+          // yukarı kaydırıyor
+          nav.style.transform = 'translateY(0)';
+        }
+        lastScrollTop = st <= 0 ? 0 : st;
+      }, false);
     </script>
   </body>
 </html>

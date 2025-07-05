@@ -1,42 +1,16 @@
 <div class="container">
-    <section class="navigation">
-        <div class="nav-container">
-            <div class="brand">
-                <a href="/">
-                    <i class="fas fa-balance-scale me-2"></i>
-                    Hakim & Savcı Atama
-                </a>
-            </div>
-            <nav>
-                <div class="nav-mobile">
-                    <a id="nav-toggle" href="#!">
-                        <span></span>
-                    </a>
-                </div>
-                <ul class="nav-list">
-                    <!-- <li>
-                        <a href="/maps">
-                            <i class="fas fa-map-marked-alt me-1"></i>
-                            Haritalar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/resimler">
-                            <i class="fas fa-images me-1"></i>
-                            Resimler
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/iletisim">
-                            <i class="fas fa-envelope me-1"></i>
-                            İletişim
-                        </a>
-                    </li> -->
-                </ul>
-            </nav>
-        </div>
-    </section>   
-     
+    <nav class="navigation-modern">
+      <div class="navbar-flex">
+        <a href="/" class="seblog-logo">SEBLOG</a>
+        <span class="atama-badge-modern">
+          <i class="fas fa-check-circle"></i>
+          <span class="atama-badge-label">Başarılı Atama</span>
+          <span class="atama-badge-count">{{ son.no }}</span>
+        </span>
+      </div>
+    </nav>
+</div>
+
 <style>
     @charset "UTF-8";
     .navigation {
@@ -328,6 +302,225 @@
         margin: 0 auto;
         padding: 10px;
     }
+
+    .navbar-basarili-atama {
+      display: flex;
+      align-items: center;
+      margin-left: 1.5rem;
+      float: right;
+      height: 70px;
+    }
+    .atama-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border-radius: 30px;
+      padding: 0.4rem 1.1rem 0.4rem 0.9rem;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      transition: box-shadow 0.2s;
+    }
+    .atama-badge:hover {
+      box-shadow: 0 4px 16px rgba(102,126,234,0.18);
+    }
+    .atama-badge-label {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-right: 0.3rem;
+      letter-spacing: 0.2px;
+    }
+    .atama-badge-count {
+      background: #fff;
+      color: #764ba2;
+      border-radius: 50%;
+      font-size: 1.08rem;
+      font-weight: 900;
+      padding: 0.18em 0.7em;
+      margin-left: 0.2rem;
+      box-shadow: 0 1px 4px rgba(102,126,234,0.10);
+      min-width: 2.1em;
+      text-align: center;
+      display: inline-block;
+    }
+    @media (max-width: 798px) {
+      .nav-mobile,
+      .nav-list {
+        display: none !important;
+      }
+      .brand {
+        position: static;
+        float: none;
+        padding-left: 0.7rem;
+        font-size: 1.1em;
+        line-height: 70px;
+        width: auto;
+        display: flex;
+        align-items: center;
+        font-weight: 800;
+      }
+      .brand a {
+        font-size: 1.1em;
+        font-weight: 800;
+        color: var(--primary-color) !important;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 0;
+      }
+      .navbar-basarili-atama {
+        float: none;
+        margin-left: auto;
+        margin-right: 0.7rem;
+        justify-content: flex-end;
+        height: 70px;
+        display: flex;
+        align-items: center;
+      }
+      .atama-badge {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+      }
+      .atama-badge-label {
+        display: inline-block !important;
+      }
+    }
+
+    .seblog-logo {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 1.45em;
+      letter-spacing: 0.04em;
+      color: var(--primary-color);
+      text-shadow: 0 2px 8px rgba(102,126,234,0.08);
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .seblog-logo:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Modern navbar CSS */
+    .navigation-modern {
+      width: 100%;
+      height: 60px;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+      border-radius: 0 0 18px 18px;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0;
+    }
+    .navbar-flex {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      padding: 0 18px;
+    }
+    
+    /* Büyük ekranlar için daha geniş container */
+    @media (min-width: 1400px) {
+      .navbar-flex {
+        max-width: 1600px;
+        padding: 0 24px;
+      }
+    }
+    
+    @media (min-width: 1600px) {
+      .navbar-flex {
+        max-width: 1800px;
+        padding: 0 32px;
+      }
+    }
+    .seblog-logo {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 1.35em;
+      letter-spacing: 0.04em;
+      color: var(--primary-color);
+      text-shadow: 0 2px 8px rgba(102,126,234,0.08);
+      text-transform: uppercase;
+      transition: color 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      height: 60px;
+    }
+    .seblog-logo:hover {
+      color: var(--secondary-color);
+    }
+    .atama-badge-modern {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border-radius: 22px;
+      padding: 0.22em 0.95em 0.22em 0.7em;
+      font-weight: 700;
+      font-size: 1em;
+      box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+      transition: box-shadow 0.2s;
+      min-height: 36px;
+      min-width: 48px;
+    }
+    .atama-badge-modern:hover {
+      box-shadow: 0 4px 16px rgba(102,126,234,0.18);
+    }
+    .atama-badge-label {
+      font-size: 0.98em;
+      font-weight: 600;
+      margin-right: 0.2em;
+      letter-spacing: 0.2px;
+      display: inline-block;
+    }
+    .atama-badge-count {
+      background: #fff;
+      color: #764ba2;
+      border-radius: 50%;
+      font-size: 1.08em;
+      font-weight: 900;
+      padding: 0.13em 0.7em;
+      margin-left: 0.1em;
+      box-shadow: 0 1px 4px rgba(102,126,234,0.10);
+      min-width: 2em;
+      text-align: center;
+      display: inline-block;
+    }
+    @media (max-width: 798px) {
+      .navigation-modern {
+        height: 54px;
+        border-radius: 0 0 12px 12px;
+      }
+      .navbar-flex {
+        height: 54px;
+        padding: 0 8px;
+        max-width: 100%;
+      }
+      .seblog-logo {
+        font-size: 1.08em;
+        height: 54px;
+        padding-left: 0.1em;
+      }
+      .atama-badge-modern {
+        font-size: 0.98em;
+        min-height: 30px;
+        min-width: 38px;
+        padding: 0.13em 0.7em 0.13em 0.5em;
+      }
+      .atama-badge-label {
+        display: inline-block !important;
+      }
+    }
 </style>
 
 <script>
@@ -358,6 +551,34 @@
             });
         }); // end DOM ready
     })(jQuery); // end jQuery
+
+    // Mobilde başarılı atama yazısı harf harf kaybolsun
+    document.addEventListener('DOMContentLoaded', function() {
+      function isMobile() {
+        return window.innerWidth <= 798;
+      }
+      if (isMobile()) {
+        var labels = document.querySelectorAll('.atama-badge-label');
+        console.log("Badge-label adedi:", labels.length);
+        labels.forEach(function(label) {
+          setTimeout(function() {
+            let text = label.textContent;
+            let i = 0;
+            function eraseLetter() {
+              if (i < text.length) {
+                label.textContent = text.slice(0, text.length - i - 1);
+                i++;
+                setTimeout(eraseLetter, 60);
+              } else {
+                label.remove();
+                console.log("Badge-label silindi!");
+              }
+            }
+            eraseLetter();
+          }, 2200);
+        });
+      }
+    });
 </script>
 </div>
 
